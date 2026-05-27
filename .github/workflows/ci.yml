@@ -1,0 +1,19 @@
+name: Docker CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Construir y probar contenedores con Docker Compose
+      run: docker compose up -d --build
+
+    - name: Verificar que los contenedores estén corriendo
+      run: docker compose ps
